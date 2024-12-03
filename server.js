@@ -16,6 +16,11 @@ const app = express();
 //  JavaScript
 app.set("view engine", "ejs");
 
+// load assets
+app.use("/css", express.static("assets/css"));
+app.use("/img", express.static("assets/img"));
+app.use("/js", express.static("assets/js"));
+
 // create the HTTP server
 const server = http.createServer(app);
 
