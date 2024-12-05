@@ -4,7 +4,7 @@
  */
 
 const submitButton = document.querySelector("input.submit");
-submitButton.addEventListener("click", () => {
+submitButton.addEventListener("click", async () => {
   // get the values entered by the user
   const date = document.querySelector("input.date").value;
 
@@ -16,8 +16,18 @@ submitButton.addEventListener("click", () => {
 
   const content = document.querySelector("textarea.content").value;
 
-  console.log(date + "; " + habitOfMind + "; " + content);
+  const entry = { date, habit: habitOfMind, content };
+  const response = await fetch("/createEntry", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(entry),
+  });
 
-  // for now, redirect to the home page
-  window.location = "/";
+  if (response.ok) {
+    window.location = "/";
+  } else {
+    console.error("error creating entry");
+  }
 });

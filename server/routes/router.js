@@ -20,4 +20,10 @@ route.get("/createEntry", (req, res) => {
   res.render("createEntry", { habits: habitsOfMind });
 });
 
+route.post("/createEntry", (req, res) => {
+  const entry = req.body;
+  console.log("entry" + entry);
+  res.status(201).end();
+});
+
 module.exports = route;
