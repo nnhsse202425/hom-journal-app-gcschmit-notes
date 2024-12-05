@@ -16,6 +16,14 @@ const app = express();
 //  POST commands)
 app.use(express.json());
 
+// load environment variables from the .env file into process.env
+const dotenv = require("dotenv");
+dotenv.config({ path: ".env" });
+
+// connect to the database
+const connectDB = require("./server/database/connection");
+connectDB();
+
 // set the template engine to EJS, which generates HTML with embedded
 //  JavaScript
 app.set("view engine", "ejs");
