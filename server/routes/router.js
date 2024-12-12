@@ -35,7 +35,10 @@ route.get("/createEntry", (req, res) => {
 
 route.post("/createEntry", async (req, res) => {
   const entry = new Entry({
-    date: req.body.date,
+    // When the time zone offset is absent, date-only forms are interpreted as
+    //  a UTC time and date-time forms are interpreted as a local time. We want
+    //  the date object to reflect local time; so add a time of midnight.
+    date: new Date(req.body.date + "T00:00:00"),
     email: req.session.email,
     habit: req.body.habit,
     content: req.body.content,
